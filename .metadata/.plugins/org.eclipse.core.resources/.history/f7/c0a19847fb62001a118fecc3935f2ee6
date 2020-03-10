@@ -1,0 +1,10 @@
+package clases;
+
+import java.util.ArrayList;
+
+public class Propiedad {
+	private int id, precio, hipoteca, precio_casa, renta, num_casas, dueño;
+	private ArrayList<Integer> renta_casas;
+	private String nombre, imagen;
+	private boolean hipotecada, se_puede_construir;
+}

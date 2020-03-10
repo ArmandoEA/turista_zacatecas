@@ -1,0 +1,5 @@
+package conexion;
+
+public final class Datos_conexion {
+	
+}

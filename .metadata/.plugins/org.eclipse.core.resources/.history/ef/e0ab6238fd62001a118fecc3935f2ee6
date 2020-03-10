@@ -1,0 +1,66 @@
+package conexion;
+
+public class ConexionDB_propiedad {
+	/**
+     * atributos de la clase
+     */
+	private static Connection con;
+    private static Libros_ConexionBD INSTANCE = null;
+    
+    /**
+     * constructor
+     */
+    private Libros_ConexionBD(){
+    	
+    }
+	
+	/**
+	 * datos de la conexion
+	 */
+	public static void performConnection() {
+		String host = "127.0.0.1";
+		String user = "root";
+		String pass = "";
+		String dtbs = "organizar todo";
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String newConnectionURL = "jdbc:mysql://" + host + "/" + dtbs
+					+ "?" + "user=" + user + "&password=" + pass;
+					con = DriverManager.getConnection(newConnectionURL);
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Conectece a la Base de Datos para poder usar la aplicacion", "Error", JOptionPane.WARNING_MESSAGE);
+		}
+		
+	}
+	
+	 /**
+	 * crea una instancia de conexion
+	 */
+	private synchronized static void createInstance() {
+	        if (INSTANCE == null) { 
+	            INSTANCE = new Libros_ConexionBD();
+	            performConnection();
+	        }
+	    }
+	 
+	    /**
+	     * Metodo para obtener una instancia, si ya existe la retorna sino la crea
+	     * @return instancia si existe
+	     */
+	    public static Libros_ConexionBD getInstance() {
+	        if (INSTANCE == null) createInstance();
+	        return INSTANCE;
+	    }
+	
+	/**
+	 * Metodo para cerrar la conexion
+	 */
+	public void closeConnection() {
+		try {
+			con.close();
+		}catch (Exception e) {
+			System.out.println("Error en el cierre de la conexion.");
+		}
+	}
+}

@@ -1,0 +1,7 @@
+package clases;
+
+public class Propiedad {
+	private int id, precio, hipoteca, gama_casa, renta, num_casas, dueño;
+	private String nombre, imagen;
+	private boolean hipotecada;
+}

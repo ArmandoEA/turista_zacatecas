@@ -1,0 +1,5 @@
+package conexion;
+
+public class ConexionDB_propiedad {
+
+}

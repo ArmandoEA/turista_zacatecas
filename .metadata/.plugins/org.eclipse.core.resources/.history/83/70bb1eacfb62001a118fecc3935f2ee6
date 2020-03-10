@@ -1,0 +1,20 @@
+package clases;
+
+import java.util.ArrayList;
+
+public class Propiedad {
+	private int id, precio, hipoteca, precio_casa, renta, num_casas, dueño;
+	private ArrayList<Integer> renta_casas;
+	private String nombre, imagen;
+	private boolean hipotecada, se_puede_construir;
+	
+	public Propiedad(int id, String nombre, int precio, int renta, int precio_casa, ArrayList<Integer> renta_casas){
+		this.id = id;
+		this.nombre = nombre;
+		this.precio = precio;
+		this.renta = renta;
+		this.hipoteca = precio/2;
+		this.precio_casa =  precio_casa;
+		this.imagen = Integer.toString(id);
+	}
+}

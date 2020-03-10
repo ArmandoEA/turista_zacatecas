@@ -1,0 +1,60 @@
+package conexion;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import javax.swing.JOptionPane;
+
+public class ConexionBD_propiedad {
+	
+	private static Connection con;
+    private static ConexionBD_propiedad INSTANCE = null;
+	
+	
+	public static void performConnection() {
+		String host = "localhost";
+		String user = "root";
+		String pass = "";
+		String dtbs = "turista_zacatecas";
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			String newConnectionURL = "jdbc:mysql://" + host + "/" + dtbs
+					+ "?" + "user=" + user + "&password=" + pass;
+			con = DriverManager.getConnection(newConnectionURL);
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se pudo hacer la conexión a la base de datos", "Error", JOptionPane.WARNING_MESSAGE);
+		}
+		
+	}
+	
+	 /**
+	 * crea una instancia de conexion
+	 */
+	private synchronized static void createInstance() {
+	        if (INSTANCE == null) { 
+	            INSTANCE = new ConexionBD_propiedad();
+	            performConnection();
+	        }
+	    }
+	 
+	    /**
+	     * Metodo para obtener una instancia, si ya existe la retorna sino la crea
+	     * @return instancia si existe
+	     */
+	    public static ConexionBD_propiedad getInstance() {
+	        if (INSTANCE == null) createInstance();
+	        return INSTANCE;
+	    }
+	
+	/**
+	 * Metodo para cerrar la conexion
+	 */
+	public void closeConnection() {
+		try {
+			con.close();
+		}catch (Exception e) {
+			System.out.println("Error en el cierre de la conexion.");
+		}
+	}
+}
