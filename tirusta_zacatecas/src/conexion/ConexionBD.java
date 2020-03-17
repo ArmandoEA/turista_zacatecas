@@ -16,7 +16,8 @@ public class ConexionBD {
 			String newConnectionURL = "jdbc:mysql://" + Datos_conexion.DB_HOST + "/" 
 													  + Datos_conexion.DB_NOMBRE + "?" 
 											+ "user=" + Datos_conexion.DB_USER 
-									   + "&password=" + Datos_conexion.DB_PASS;
+									   + "&password=" + Datos_conexion.DB_PASS
+									   + "&useSSL=false";
 			con = DriverManager.getConnection(newConnectionURL);
 		}catch (Exception e) {
 			System.out.println("Error: " + e.getMessage());

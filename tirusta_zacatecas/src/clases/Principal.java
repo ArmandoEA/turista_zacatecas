@@ -2,14 +2,27 @@ package clases;
 
 import java.util.ArrayList;
 
+import conexion.ConexionBD;
+import conexion.ConexionBD_autobus;
+import conexion.ConexionBD_lugarespublicos;
 import conexion.ConexionBD_propiedad;
 
 public class Principal {
 	public static void main(String[] args) {
-		ConexionBD_propiedad conBD_prop = ConexionBD_propiedad.getInstance();
-		ArrayList<Propiedad> lista_prop= conBD_prop.CargarPropiedadesBD();
+		int i;
+		
+		ConexionBD.getInstance();	//Inicializar la conexión a la Base de Datos
+		ConexionBD_propiedad conBD_prop = new ConexionBD_propiedad(); 
+		ConexionBD_autobus conBD_bus = new ConexionBD_autobus();
+		ConexionBD_lugarespublicos conBD_lug = new ConexionBD_lugarespublicos();
+		
+		ArrayList<Propiedad> lista_prop = conBD_prop.CargarPropiedadesBD();
+		ArrayList<Autobus> lista_bus = conBD_bus.CargarAutobusesBD();
+		ArrayList<LugaresPublicos> lista_lug = conBD_lug.CargarLugaresPublicosBD();
+		
+		System.out.println("PROPIEDADES:");
 		if(lista_prop != null){
-			for(int i=0; i<lista_prop.size(); i++){
+			for(i=0; i<lista_prop.size(); i++){
 				System.out.println("ID: " + lista_prop.get(i).id);
 				System.out.println("Nombre: " + lista_prop.get(i).nombre);
 				System.out.println("Precio: " + lista_prop.get(i).precio);
@@ -27,6 +40,30 @@ public class Principal {
 			}
 		}else{
 			System.out.println("No hay propiedades guardadas");
+		}
+		
+		System.out.println("\n\nAUTOBUSES:");
+		if(lista_bus != null){
+			for(i=0; i<lista_bus.size(); i++){
+				System.out.println("ID: " + lista_bus.get(i).id);
+				System.out.println("Ruta: " + lista_bus.get(i).ruta);
+				System.out.println("Precio: " + lista_bus.get(i).precio);
+			}
+		}
+		else{
+			System.out.println("No hay autobuses guardados");
+		}
+		
+		System.out.println("\n\nLUGARES PUBLICOS:");
+		if(lista_lug != null){
+			for(i=0; i<lista_lug.size(); i++){
+				System.out.println("ID: " + lista_lug.get(i).id);
+				System.out.println("Nombre: " + lista_lug.get(i).nombre);
+				System.out.println("Precio: " + lista_lug.get(i).precio);
+			}
+		}
+		else{
+			System.out.println("No hay lugares guardados");
 		}
 	}
 }

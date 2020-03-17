@@ -1,0 +1,43 @@
+package conexion;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+
+import clases.Propiedad;
+
+public class ConexionBD_propiedad /*extends ConexionBD*/{
+	
+	//Recuperar Todas las propiedades
+	public ArrayList<Propiedad> CargarPropiedadesBD(){
+		ArrayList<Propiedad> lista_propiedades = new ArrayList<Propiedad>();
+		int aux_id, aux_precio, aux_renta, aux_precio_casa;
+		int []aux_renta_casas = new int[5];
+		String aux_nombre;
+		
+		try{
+			PreparedStatement ps = ConexionBD.con.prepareStatement("SELECT * FROM propiedades");
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				aux_id = rs.getInt("id_prop");
+				aux_nombre = rs.getString("nombre_prop");
+				aux_precio = rs.getInt("precio_prop");
+				aux_renta = rs.getInt("renta_prop");
+				aux_precio_casa = rs.getInt("precio_casa_prop");
+				aux_renta_casas[0] = rs.getInt("casa1_prop");
+				aux_renta_casas[1] = rs.getInt("casa2_prop");
+				aux_renta_casas[2] = rs.getInt("casa3_prop");
+				aux_renta_casas[3] = rs.getInt("casa4_prop");
+				aux_renta_casas[4] = rs.getInt("hotel_prop");
+				
+				lista_propiedades.add(new Propiedad(aux_id, aux_nombre, aux_precio, aux_renta, aux_precio_casa, aux_renta_casas));
+			}
+			rs.close();
+			return lista_propiedades;
+		}catch(SQLException e){
+			return null;
+		}
+	}
+}

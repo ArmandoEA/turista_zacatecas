@@ -1,7 +1,5 @@
 package clases;
 
-import java.util.ArrayList;
-
 public class Propiedad {
 	public int id, precio, hipoteca, precio_casa, renta, num_casas, dueño;
 	public int[] renta_casas;

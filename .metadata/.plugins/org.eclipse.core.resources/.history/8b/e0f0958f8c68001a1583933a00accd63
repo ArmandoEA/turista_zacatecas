@@ -1,0 +1,51 @@
+package clases;
+
+import java.util.ArrayList;
+
+import conexion.ConexionBD;
+import conexion.ConexionBD_autobus;
+import conexion.ConexionBD_propiedad;
+
+public class Principal {
+	public static void main(String[] args) {
+		int i;
+		
+		ConexionBD.getInstance();
+		ConexionBD_propiedad conBD_prop = new ConexionBD_propiedad(); 
+		ConexionBD_autobus conBD_bus = new ConexionBD_autobus();
+		
+		ArrayList<Propiedad> lista_prop = conBD_prop.CargarPropiedadesBD();
+		ArrayList<Autobus> lista_bus = conBD_bus.CargarAutobusesBD();
+		
+		if(lista_prop != null){
+			for(i=0; i<lista_prop.size(); i++){
+				System.out.println("ID: " + lista_prop.get(i).id);
+				System.out.println("Nombre: " + lista_prop.get(i).nombre);
+				System.out.println("Precio: " + lista_prop.get(i).precio);
+				System.out.println("Hipoteca: " + lista_prop.get(i).hipoteca);
+				System.out.println("Renta: " + lista_prop.get(i).renta);
+				System.out.println("Precio Casa: " + lista_prop.get(i).precio_casa);
+				System.out.println("1 Casa: " + lista_prop.get(i).renta_casas[0]);
+				System.out.println("2 Casa: " + lista_prop.get(i).renta_casas[1]);
+				System.out.println("3 Casa: " + lista_prop.get(i).renta_casas[2]);
+				System.out.println("4 Casa: " + lista_prop.get(i).renta_casas[3]);
+				System.out.println("Hotel: " + lista_prop.get(i).renta_casas[4]);
+				System.out.println("URL Imagen: " + lista_prop.get(i).url_imagen);
+				System.out.println("Está Hipotecada: " + lista_prop.get(i).esta_hipotecada);
+				System.out.println();
+			}
+		}else{
+			System.out.println("No hay propiedades guardadas");
+		}
+		
+		System.out.print("\n\nAUTOBUSES");
+		if(lista_bus != null){
+			for(i=0; i<lista_bus.size(); i++){
+				System.out.println("ID: " + lista_bus.get(i).id);
+			}
+		}
+		else{
+			System.out.println("No hay autobuses guardados");
+		}
+	}
+}

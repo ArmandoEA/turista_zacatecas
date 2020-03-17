@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import clases.Propiedad;
 
-public class ConexionBD_propiedad extends ConexionBD{
+public class ConexionBD_propiedad{
 	
 	//Recuperar Todas las propiedades
 	public ArrayList<Propiedad> CargarPropiedadesBD(){
@@ -18,7 +18,7 @@ public class ConexionBD_propiedad extends ConexionBD{
 		String aux_nombre;
 		
 		try{
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM propiedades");
+			PreparedStatement ps = ConexionBD.con.prepareStatement("SELECT * FROM propiedades");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				aux_id = rs.getInt("id_prop");
